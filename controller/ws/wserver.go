@@ -2,6 +2,7 @@ package ws
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/gorilla/websocket"
 )
@@ -103,8 +104,14 @@ func (c *Client) Write() {
 				c.Socket.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
-
+			fmt.Println(string(message))
 			c.Socket.WriteMessage(websocket.TextMessage, message)
 		}
 	}
 }
+
+// 说明
+// Start():启动websocket服务
+// Send():向连接websocket的管道chan写入数据
+// Read():读取在websocket管道中的数据
+// Write():通过websocket协议向连接到ws的客户端发送数据
