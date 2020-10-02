@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"strings"
+	"webssh/controller/ws"
 	"webssh/router"
 
 	"github.com/gin-gonic/gin"
@@ -16,5 +17,6 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 
 	router := router.InitRouter()
+	go ws.Manager.Start()
 	router.Run(strings.Join([]string{":", port}, ""))
 }
